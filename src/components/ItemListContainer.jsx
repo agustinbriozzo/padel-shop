@@ -1,28 +1,32 @@
 import React from "react";
-import arrayProducts from "./json/products.json"
 import { useState } from "react";
 import { useEffect } from "react";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
+import {collection, getDocs, getFirestore, query, where} from "firebase/firestore";
+import Loading from "./Loading";
 
 const ItemListContainer = () => {
     const [items, setItems] = useState([])
+    const [loading, setLoading] = useState(true)
     const {id} = useParams()
 
     useEffect(() => {
-        const promesa = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(id ? arrayProducts.filter(item => item.cat === id) : arrayProducts)
-            }, 2000)
-        })
+        const db = getFirestore();
+        const paletas = collection(db, "products");
+        
+        const q = id ? query(paletas, where("cat", "==", id)) : paletas;
+        
+        getDocs(q).then((snapShot) => {
+            setItems(snapShot.docs.map((doc) => ({id:doc.id, ...doc.data()})
+            ))
+            setLoading(false)
+        });
+    }, [id]);
 
-        promesa.then((data) => {
-            setItems(data)
-        })
-    }, [id])
     return(
         <div className="container">
-            <ItemList items={items}/>
+            {loading ? <Loading /> : <ItemList items={items} />}
         </div>
     )
 }

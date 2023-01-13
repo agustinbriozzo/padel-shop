@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
-import arrayProducts from "./json/products.json"
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import ItemDetail from "./ItemDetail";
 import { useParams } from "react-router-dom";
+import Loading from "./Loading";
 
 const ItemDetailContainer = () =>{
     const [item, setItem] = useState([])
+    const [loading, setLoading] = useState(true)
     const {id} = useParams()
 
     useEffect(() => {
-        const promesa = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(arrayProducts.find(item => item.id === parseInt(id)))
-            }, 2000)
-        })
-
-        promesa.then((data) => {
-            setItem(data)
-        })
-    }, [id])
-
+        const db = getFirestore();
+        const item = doc(db, "products", id);
+        getDoc(item).then((snapShot) => {
+            if (snapShot.exists()) {
+                setItem({id:snapShot.id, ...snapShot.data()});
+                setLoading(false)
+            } else {
+                console.log("El Producto No Existe!");
+            }
+        });
+    }, [id]);
 
     return(
         <div className="conainer">
-            <ItemDetail item={item}/>
+            {loading ? <Loading /> : <ItemDetail item={item} />}
         </div>
     )
 }
