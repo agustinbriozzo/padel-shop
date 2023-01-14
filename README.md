@@ -1,3 +1,11 @@
+# padel-shop
+
+Soy muy aficionado del deporte, mayormente del padel, por eso decidí hacer un ecommerce relacionado a la venta de paletas.
+A simple vista, ni bien entrar a la página se muestran todos los productos, los cuales se pueden filtrar por categoria en la barra de navegacion.
+Al clickear sobre uno de los productos muestro información detallada del mismo, pudiendo agregar al carrito la cantidad deseada, y terminar la compra.
+Luego, en el carrito muestro informacion detallada de los productos agregados, pudiendo vaciar el mismo, eliminar algun producto en particular, o finalizar la compra.
+Al finalizar la compra muestro el detalle del pedido, y un formulario para generar el mismo.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

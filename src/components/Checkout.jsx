@@ -41,12 +41,12 @@ const Checkout = () => {
     return (
         <div className="container">
             <div className="row my-5">
-                <div className="col-md-6">
+                <div className="col-md-12">
                         <table className="table">                                
                             <tbody>
                                 {cart.map(item => (
                                     <tr key={item.id}>
-                                        <td><img src={item.image} alt={item.name} width={85} /></td>
+                                        <td><img src={item.image} alt={item.name} width={150} /></td>
                                         <td className="align-middle">{item.name}</td>
                                         <td className="align-middle text-end">{item.quantity}</td>
                                         <td className="align-middle text-end">${item.quantity * item.price}</td>
@@ -61,8 +61,10 @@ const Checkout = () => {
                             </tbody>
                         </table>    
                 </div>
+            </div>
 
-                <div className="col-md-6">
+            <div className="row my-5">
+                <div className="col-md-12">
                         <form>
                             <div className="mb-3">
                                 <label for="nombre" className="form-label">Nombre:</label>
@@ -76,7 +78,7 @@ const Checkout = () => {
                                 <label for="email" className="form-label">Email</label>
                                 <input type="text" className="form-control" id="email" placeholder="Ingrese su Email" onInput={(e) => {setEmail(e.target.value)}} />
                             </div>
-                            <button type="button" className="btn btn-dark" onClick={generarOrden}>GENERAR PEDIDO</button>
+                            <button type="button" className="btn btn-dark btn-lg" onClick={generarOrden}>GENERAR PEDIDO</button>
                         </form>
                     </div>
             </div>

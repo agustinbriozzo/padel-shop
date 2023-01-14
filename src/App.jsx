@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 import Error404 from "./components/Error404";
-import Footer from "./components/Footer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import ItemListContainer from "./components/ItemListContainer";
 import NavBar from "./components/NavBar";
@@ -24,7 +23,6 @@ function App(){
                     <Route path={"/thankyou/:id"} element={<ThankYou />} />
                     <Route path="*" element={<Error404/>}/>
                 </Routes>
-                <Footer/>
             </BrowserRouter>
         </CartContextProvider>
     )
